@@ -4,6 +4,11 @@ package main
 出自：http://my.oschina.net/yunfound/blog/141222?fromerr=CmIFKSjD
 其实这种实现方式仍然是每个连接一个coroutine，只不过是限制了coroutine的数量，
 根本达不到epoll地的效果
+
+golang中的net.Conn的Read和Write都是同步的，所以每个net.Conn必须要用一个coroutine，
+所以无法做到epoll同样的功能。如果要使用epoll，直接import "syscall"。
+这里有个例子：
+https://gist.github.com/tevino/3a4f4ec4ea9d0ca66d4f
 */
 
 import (
